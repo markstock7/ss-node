@@ -5,7 +5,7 @@ import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"io/ioutil"
-	"bfnode/utils"
+	"ss-node/utils"
 )
 
 type Database struct {

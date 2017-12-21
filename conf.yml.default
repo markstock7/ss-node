@@ -1,0 +1,5 @@
+shadowsocks:
+    address: "host:port"
+manager:
+    address: "host:port"
+    password: "12345678"

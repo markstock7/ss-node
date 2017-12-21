@@ -5,11 +5,12 @@ import (
 	"crypto/md5"
 	"time"
     "encoding/json"
-	"bfnode/utils"
+	"ss-node/utils"
 	"strconv"
 	"fmt"
-	"bfnode/conf"
-	"bfnode/shadowsocks"
+	"ss-node/models"
+	"ss-node/conf"
+	"ss-node/shadowsocks"
 )
 
 type Server struct {
@@ -81,8 +82,8 @@ func (self *Server) handleConnection(conn net.Conn) {
 }
 
 func (self *Server) receiveCommand(data []byte, code []byte) {
-	message := &Message {
-		options: &Options{},
+	message := &models.Message {
+		Options: &models.Options{},
 	}
 
 	err := json.Unmarshal(data, message)
@@ -91,7 +92,7 @@ func (self *Server) receiveCommand(data []byte, code []byte) {
 		return
 	}
 
-	switch command := message.command; command {
+	switch command := message.Command; command {
 		case "add":
 			fmt.Println("OS X.")
 		case "del":

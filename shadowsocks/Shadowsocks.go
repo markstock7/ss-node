@@ -5,10 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
-	"bfnode/models"
+	"ss-node/models"
 	"strconv"
-	"bfnode/conf"
-	"bfnode/server"
+	"ss-node/conf"
 )
 
 type Shadowsocks struct {

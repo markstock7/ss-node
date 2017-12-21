@@ -1,4 +1,4 @@
-package: bfnode
+package: ss-node
 import:
 - package: gopkg.in/yaml.v2
 - package: github.com/mattn/go-sqlite3

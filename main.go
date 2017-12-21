@@ -5,10 +5,10 @@ import (
 	"os/exec"
 	"io/ioutil"
 	"gopkg.in/yaml.v2"
-	"bfnode/utils"
-	"bfnode/server"
-	"bfnode/conf"
-	"bfnode/shadowsocks"
+	"ss-node/utils"
+	"ss-node/server"
+	"ss-node/conf"
+	"ss-node/shadowsocks"
 )
 
 
