@@ -1,0 +1,6 @@
+
+shadowsocks:
+    address: 45.77.15.53:4334
+manager:
+    address: 0.0.0.0:4335
+    password: "abcdefg"
