@@ -1,0 +1,8 @@
+{
+    "server": "0.0.0.0", //服务器IP，0.0.0.0代表绑定服务器的所有IP
+    "server_port": 4334, //服务端口
+    "password": "password", //密码
+    "timeout": "5", //超时重连
+    "method": "chacha20-ietf-poly1305", //加密方式
+    "mode": "tcp_and_udp" //代理TCP和UDP
+}

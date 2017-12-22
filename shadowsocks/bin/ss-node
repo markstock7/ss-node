@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if command ss-manager -v git >/dev/null 2>&1; then
+  nohup ss-manager -c /root/config.json -u --manager-address 127.0.0.1:4334 > /root/ss-node.log 2>&1 &
+else
+  nohup ssserver -c /root/config.json --manager-address 127.0.0.1:4334 > /root/ss-node.log 2>&1 &
+fi
+
+pm2 --name ss-node -f start ssmgr -x -- -c /root/ss-node.yml
