@@ -6,8 +6,8 @@ from fabric.api import *
 from fabric.colors import *
 
 env.use_ssh_config = True
-with open('./shadowsocks/config.json') as json_file:
-    env.hosts = json.load(json_file)['hosts']
+# with open('./shadowsocks/config.json') as json_file:
+#     env.hosts = json.load(json_file)['hosts']
 
 
 def uploadFiles(s, d):
@@ -22,18 +22,17 @@ def setFirewall():
   run('sudo iptables -F')
 
 def uploadPackage():
-  local('zip -r ./shadowsocks.zip ./shadowsocks')
+  local('zip -r ./ss-node.zip .')
   with settings(warn_only=True):
-    run('rm ~/shadowsocks.zip')
-  uploadFiles('./shadowsocks.zip', '~/')
-  local('rm shadowsocks.zip')
-  run('rm -rf ~/shadowsocks')
-  run('unzip ~/shadowsocks.zip && cd ~/shadowsocks')
+    run('rm ~/ss-node.zip')
+  uploadFiles('./ss-node.zip', '~/')
+  local('rm ss-node.zip')
+  run('rm -rf ~/ss-node')
+  run('unzip ~/ss-node.zip -d ss-node && cd ~/ss-node')
 
-def deploy_ss_node():
+def deploy():
     uploadPackage()
-    run('mv ~/shadowsocks/Dockerfiles/ss/Dockerfile ~/shadowsocks/Dockerfile && cd ~/shadowsocks \
-      && docker build -t shadowsocks .')
+    run('cd ~/ss-node && docker build -t ss-node .')
     setFirewall()
 
 

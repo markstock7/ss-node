@@ -1,3 +1,7 @@
 conf.yml
+
 .idea/
+
 vendor/
+
+node_modules/

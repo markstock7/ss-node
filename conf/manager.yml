@@ -1,0 +1,7 @@
+shadowsocks:
+    address: "127.0.0.1:4334"
+manager:
+    address: "127.0.0.1:4335"
+    password: "12345678"
+db:
+  client: 'sqlite3'
