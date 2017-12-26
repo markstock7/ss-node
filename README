@@ -1,0 +1,26 @@
+
+# DEPLOY
+
+Set up if you dont have docker installed on you centos7 server
+
+````
+  fab setup_server  -H host -u root
+````
+
+Then deploy ss-node
+
+````
+  fab deploy  -H host -u root
+````
+
+# RUN
+
+````
+docker run --net=host --privileged \
+           --restart always \
+           --name ss-node \
+           -dit ss-node:latest
+````
+
+
+pm2 --name ss-node -f start ssmgr -x -- -c /root/ss-node.yml

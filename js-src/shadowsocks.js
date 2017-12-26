@@ -79,7 +79,7 @@ const connect = () => {
                 } else {
                     const insertPromises = [];
                     for (let i = 0; i < Math.ceil(insertFlow.length / 50); i++) {
-                        const insert = knex('flow').insert(insertFlow.slice(i * 50, i * 50 + 50));
+                        const insert = knex('flows').insert(insertFlow.slice(i * 50, i * 50 + 50));
                         insertPromises.push(insert);
                     }
                     Promise.all(insertPromises).then();
@@ -187,7 +187,7 @@ const addAccount = async(port, password) => {
         await sendMessage(`add: {"server_port": ${ port }, "password": "${ password }"}`);
         return { port, password };
     } catch (err) {
-        return Promise.reject('error');
+        return Promise.reject(err);
     }
 };
 
@@ -199,13 +199,13 @@ const removeAccount = async(port) => {
         if (deleteAccount <= 0) {
             return Promise.reject('error');
         }
-        await knex('flow').where({
+        await knex('flows').where({
             port,
         }).delete();
         await sendMessage(`remove: {"server_port": ${ port }}`);
         return { port };
     } catch (err) {
-        return Promise.reject('error');
+        return Promise.reject(err);
     }
 };
 
@@ -221,7 +221,7 @@ const changePassword = async(port, password) => {
         await sendMessage(`add: {"server_port": ${ port }, "password": "${ password }"}`);
         return { port, password };
     } catch (err) {
-        return Promise.reject('error');
+        return Promise.reject(err);
     }
 };
 
@@ -230,7 +230,7 @@ const listAccount = async() => {
         const accounts = await knex('accounts').select(['port', 'password']);
         return accounts;
     } catch (err) {
-        return Promise.reject('error');
+        return Promise.reject(err);
     }
 };
 
@@ -240,7 +240,7 @@ const getFlow = async(options) => {
         const endTime = moment(options.endTime || new Date()).toDate().getTime();
 
         const accounts = await knex('accounts').select(['port']);
-        const flows = await knex('flow').select(['port'])
+        const flows = await knex('flows').select(['port'])
             .sum('flow as sumFlow').groupBy('port')
             .whereBetween('time', [startTime, endTime]);
         accounts.map(m => {
@@ -255,12 +255,12 @@ const getFlow = async(options) => {
             return m;
         });
         if (options.clear) {
-            await knex('flow').whereBetween('time', [startTime, endTime]).delete();
+            await knex('flows').whereBetween('time', [startTime, endTime]).delete();
         }
         return accounts;
     } catch (err) {
         logger.error(err);
-        return Promise.reject('error');
+        return Promise.reject(err);
     }
 };
 

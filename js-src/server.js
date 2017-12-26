@@ -27,11 +27,11 @@ const checkCode = (data, password, code) => {
 const receiveCommand = async(data, code) => {
     try {
         const time = Number.parseInt(data.slice(0, 6).toString('hex'), 16);
-        await knex('command').whereBetween('time', [0, Date.now() - 10 * 60 * 1000]).del();
-        await knex('command').insert({
-            code: code.toString('hex'),
-            time,
-        });
+        // await knex('command').whereBetween('time', [0, Date.now() - 10 * 60 * 1000]).del();
+        // await knex('command').insert({
+        //     code: code.toString('hex'),
+        //     time,
+        // });
         const message = JSON.parse(data.slice(6).toString());
         logger.info(message);
         if (message.command === 'add') {

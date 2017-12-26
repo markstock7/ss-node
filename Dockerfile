@@ -51,3 +51,6 @@ EXPOSE $SS_PORT/tcp
 EXPOSE $SS_PORT/udp
 EXPOSE $SS_MANAGER_PORT/tcp
 EXPOSE $SS_MANAGER_PORT/udp
+
+
+ENTRYPOINT ["~/ss-node/bin/ss-node"]
